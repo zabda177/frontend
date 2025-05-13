@@ -1,0 +1,124 @@
+<!-- Modal pour saisir le code -->
+<div *ngIf="isModalOpen" class="modal-overlay">
+  <div class="modal-content">
+    <h3 class="modal-title">Vérification de demande</h3>
+
+    <div class="form-group">
+      <label for="codeInput">Code de demande</label>
+      <input
+        type="text"
+        id="codeInput"
+        [(ngModel)]="codeInput"
+        class="form-control"
+        placeholder="Entrez le code de demande"
+        autofocus
+      />
+    </div>
+
+    <div *ngIf="error" class="error-message">
+      <p>{{ error }}</p>
+    </div>
+
+    <div class="modal-actions">
+      <button
+        (click)="closeModalWithRedirect()"
+        class="btn-cancel">
+        Annuler
+      </button>
+      <button
+        (click)="handleVerification()"
+        [disabled]="loading"
+        class="btn-verify">
+        {{ loading ? 'Chargement...' : 'Vérifier' }}
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Affichage du statut -->
+<div *ngIf="demandeSoumise" class="status-container">
+  <div class="status-info">
+    <p class="demand-number">Demande N°: {{ demandeSoumise.codeDemande }}</p>
+    <p class="status-text">Statut actuel: <span class="current-status">{{ demandeSoumise.status }}</span></p>
+  </div>
+
+  <div class="container">
+    <section class="step-wizard">
+      <ul class="step-wizard-list">
+        <!-- Demande soumise -->
+        <li class="step-wizard-item"
+            [ngClass]="{
+              'current': currentStep === 1,
+              'completed': currentStep > 1 && !isRejected()
+            }">
+          <span class="progress-count"
+                [ngClass]="{
+                  'current-step': currentStep === 1,
+                  'completed-step': currentStep > 1 && !isRejected(),
+                  'future-step': currentStep < 1 || isRejected()
+                }">
+            {{ (currentStep > 1 && !isRejected()) ? '✓' : '1' }}
+          </span>
+          <span class="progress-label">Demande Soumise</span>
+        </li>
+
+        <!-- Demande acceptée -->
+        <li class="step-wizard-item"
+            [ngClass]="{
+              'current': currentStep === 2,
+              'completed': currentStep > 2 && !isRejected()
+            }">
+          <span class="progress-count"
+                [ngClass]="{
+                  'current-step': currentStep === 2,
+                  'completed-step': currentStep > 2 && !isRejected(),
+                  'future-step': currentStep < 2 || isRejected()
+                }">
+            {{ (currentStep > 2 && !isRejected()) ? '✓' : '2' }}
+          </span>
+          <span class="progress-label">Demande Acceptée</span>
+        </li>
+
+        <!-- Validée par sous-comité -->
+        <li class="step-wizard-item"
+            [ngClass]="{
+              'current': currentStep === 3,
+              'completed': currentStep >= 3 && !isRejected()
+            }">
+          <span class="progress-count"
+                [ngClass]="{
+                  'current-step': currentStep === 3,
+                  'completed-step': currentStep >= 3 && !isRejected(),
+                  'future-step': currentStep < 3 || isRejected()
+                }">
+            {{ (currentStep >= 3 && !isRejected()) ? '✓' : '3' }}
+          </span>
+          <span class="progress-label">Validée par Sous Comité</span>
+        </li>
+
+        <!-- Demande rejetée (séparée et indépendante) -->
+        <li class="step-wizard-item reject-item"
+            [ngClass]="{
+              'current': isRejected(),
+              'completed': false,
+              'rejected': isRejected()
+            }">
+          <span class="progress-count"
+                [ngClass]="{
+                  'current-step': isRejected(),
+                  'rejected-step': isRejected(),
+                  'future-step': !isRejected()
+                }">
+            {{ isRejected() ? '✗' : '✗' }}
+          </span>
+          <span class="progress-label">Demande Rejetée</span>
+        </li>
+      </ul>
+    </section>
+  </div>
+</div>
+
+<!-- Si aucune demande n'est encore chargée et que le modal n'est pas ouvert, afficher le bouton pour ouvrir le modal -->
+<div *ngIf="!demandeSoumise && !isModalOpen" class="verification-container">
+  <button (click)="openModal()" class="btn-open-verification">Vérifier une demande</button>
+</div>

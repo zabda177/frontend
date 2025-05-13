@@ -1,0 +1,25 @@
+.header {
+  background-color: #198753;
+  color: white;
+}
+.logo {
+  width: 50px;
+  height: 50px;
+}
+.info-bar {
+  background-color: #f8f9fa;
+}
+.main-content {
+  background-color: white;
+}
+.footer {
+  background-color: #198753;
+  color: white;
+}
+.feature-icon {
+  font-size: 3rem;
+  color: #198753;
+}
+body {position: relative;}
+
+footer {position: absolute; bottom: 0; left: 0; right: 0}

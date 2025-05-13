@@ -1,0 +1,91 @@
+<!-- Ajout de ngIf pour s'assurer que demandesData existe avant d'y accéder -->
+<div class="container">
+  <!-- Sélecteur pour le type de demandeur -->
+  <div class="row mt-5 justify-content-center">
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>Sélectionner le type de demandeur</mat-label>
+      <mat-select id="typeDemandeur" (selectionChange)="onTypeDemandeurChange($event)">
+        <mat-option value="physique">Personne physique</mat-option>
+        <mat-option value="morale">Personne morale</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <app-stepper [linearModeSelected]="false" #appStepper>
+    <!-- Étape 1 : Demandeur -->
+    <cdk-step label="Demandeur">
+      <ng-container *ngIf="typeDemandeur === 'physique'">
+        <app-demandeur
+          (demandeurEvent)="etablissementDemandeurEvent($event)"
+          (typeDemandeChange)="ontypeDemandeChange($event)"
+        ></app-demandeur>
+      </ng-container>
+      <ng-container *ngIf="typeDemandeur === 'morale'">
+        <app-personne-morale
+          (personneMoraleEvent)="etablissementPersonneMoraleEvent($event)"
+          (typeDemandeChange)="ontypeDemandeChange($event)"
+        ></app-personne-morale>
+      </ng-container>
+    </cdk-step>
+
+    <!-- Étape 2 : Pièces Jointes -->
+    <cdk-step label="Pièces Jointes">
+      <ng-container *ngIf="typeDemande === 'permiPeche'">
+        <app-fichier-permis
+          (permisPecheSubmitted)="permisPecheSubmitted($event)"
+        ></app-fichier-permis>
+      </ng-container>
+      <ng-container *ngIf="typeDemande === 'licenceGuide'">
+        <app-fichier-guide
+          (LicenceGuideSubmitted)="guideSubmitted($event)"
+        ></app-fichier-guide>
+      </ng-container>
+      <ng-container *ngIf="typeDemande === 'licenceCommerciale'">
+        <app-fichier-commerciale
+          (licenceCommercialleSubmitted)="licenceCommercialleeSubmitted($event)"
+        ></app-fichier-commerciale>
+      </ng-container>
+      <ng-container *ngIf="typeDemande === 'agrementConcession'">
+        <app-fichier-concession
+          (permisConcessionSubmitted)="permisConcessionSubmitted($event)"
+        >
+        </app-fichier-concession>
+      </ng-container>
+      <ng-container *ngIf="typeDemande === 'etablissement'">
+        <app-fichier
+          (fichierSubmitted)="fichierSubmitted($event)"
+        ></app-fichier>
+      </ng-container>
+
+    </cdk-step>
+
+    <!-- Étape 3 : Résumé et soumission finale -->
+    <cdk-step label="Vérifiez vos Informations">
+      <!-- Utilisation de l'opérateur ? pour éviter les erreurs quand les objets ne sont pas initialisés -->
+      <app-resume
+        [typeDemandeur]="typeDemandeur"
+        [typeDemande]="typeDemande"
+        [demandeurData]="demandeurData"
+        [personneMoraleData]="personneMoraleData"
+        [fichierData]="fichierData"
+        [demandesData]="demandesData"
+        (demandesDataEvent)="demandesDataEvent($event)"
+        (soumissionFinale)="onSubmit()"
+      ></app-resume>
+    </cdk-step>
+  </app-stepper>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

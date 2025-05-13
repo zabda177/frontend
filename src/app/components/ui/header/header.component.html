@@ -1,0 +1,51 @@
+<header class="header py-2">
+  <div class="container d-flex justify-content-between align-items-center">
+    <img src="/assets/images/armoirie_burkina.jpg" alt="armoirie burkina" class="logo">
+    <nav>
+      <a routerLink="/customer/home" class="btn btn-danger btn-sm me-2">Accueil</a>
+      <a routerLink="/verification" class="btn btn-outline-light btn-sm me-2">Vérification</a>
+      <a routerLink="#" class="btn btn-outline-light btn-sm me-2">Textes réglementaires</a>
+           <a routerLink="#" class="btn btn-outline-light btn-sm me-2">Guide</a>
+      <a routerLink="#" class="btn btn-outline-light btn-sm me-2">Foire aux Question</a>
+
+      <!-- Utilisation de *ngIf avec isLoggedIn() pour afficher les bons boutons -->
+      <ng-container *ngIf="!isLoggedIn(); else loggedInButtons">
+        <a (click)="login()" class="btn btn-outline-light btn-sm cursor-pointer">Connexion</a>
+      </ng-container>
+
+      <ng-template #loggedInButtons>
+        <a routerLink="/dashboard" class="btn btn-outline-light btn-sm me-2">Dashboard</a>
+        <a (click)="logout()" class="btn btn-outline-light btn-sm cursor-pointer">Déconnexion</a>
+      </ng-template>
+    </nav>
+  </div>
+</header>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <header class="header py-2">
+  <div class="container d-flex justify-content-between align-items-center">
+    <img src="/assets/images/armoirie_burkina.jpg" alt="armoirie burkina" class="logo">
+    <nav>
+      <a href="#" class="btn btn-danger btn-sm me-2">Accueil</a>
+      <a href="#" class="btn btn-outline-light btn-sm me-2">Vérification</a>
+      <a href="#" class="btn btn-outline-light btn-sm me-2">Textes réglementaires</a>
+      <a href="#" class="btn btn-outline-light btn-sm me-2">FAQ</a>
+      <a href="#" class="btn btn-outline-light btn-sm me-2">Guide</a>
+      <a href="#" class="btn btn-outline-light btn-sm me-2">Foire aux Question</a>
+      <a  (click) ="login()" class="btn btn-outline-light btn-sm">Connexion</a>
+      <a (click)="logout()" class="btn btn-outline-light btn-sm">DeConnexion</a>
+    </nav>
+  </div>
+</header>
+
+<a href="/dashboard"   class="btn btn-outline-light btn-sm">Connexion</a> -->

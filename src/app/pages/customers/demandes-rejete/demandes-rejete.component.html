@@ -1,0 +1,318 @@
+<div class="container mt-4">
+    <div class="card-body fs-5">
+      <!-- Barre de recherche -->
+      <div class="form-group mb-4">
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control fs-5"
+            placeholder="Rechercher une demande..."
+            [(ngModel)]="searchTerm"
+            (keyup)="filterDemandes()">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary fs-5" type="button">
+              <i class="fa fa-search"></i> Rechercher
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Message de chargement -->
+      <div *ngIf="loading" class="text-center fs-5">
+        <div class="spinner-border text-danger" role="status">
+          <span class="sr-only">Chargement...</span>
+        </div>
+        <p>Chargement des demandes rejetées...</p>
+      </div>
+
+      <!-- Message d'erreur -->
+      <div *ngIf="error" class="alert alert-danger fs-5">
+        {{ errorMessage }}
+      </div>
+
+      <!-- Tableau des demandes -->
+      <div class="table-responsive" *ngIf="!loading && filteredDemandes.length > 0">
+        <table class="table table-striped table-hover">
+          <thead class="thead-dark">
+            <tr class="fs-5">
+              <th class="px-2">N°</th>
+              <th class="px-2">Code Demande</th>
+              <th class="px-2">Type de Demande</th>
+              <th class="px-2">Statut</th>
+              <th class="px-2">Date de Rejet</th>
+              <th class="px-2">Motif du Rejet</th>
+              <th class="px-2">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="fs-5" *ngFor="let demande of filteredDemandes | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage, totalItems: totalItems }">
+              <td class="px-3">{{ demande.id }}</td>
+              <td class="px-3">{{ demande.codeDemande }}</td>
+              <td class="px-3">{{ demande.typeDemande}}</td>
+              <td class="px-3">
+                <span class="badge bg-danger text-white fs-6">{{ demande.statut || 'REJETÉ' }}</span>
+              </td>
+              <td class="px-3">
+                <span *ngIf="demande.dateRejet; else noDate">
+                  {{ demande.dateRejet | date:'dd/MM/yyyy' }}
+                </span>
+                <ng-template #noDate>
+                  <span class="text-muted">Non disponible</span>
+                </ng-template>
+              </td>
+              <td class="px-3">
+                <span *ngIf="demande.motifRejet; else noMotif">
+                  {{ demande.motifRejet }}
+                </span>
+                <ng-template #noMotif>
+                  <span class="text-muted">Non spécifié</span>
+                </ng-template>
+              </td>
+              <td class="px-3">
+                <button class="btn btn-sm btn-info me-2 fs-6" [routerLink]="['/details-demande', demande.id]">
+                  <i class="fa fa-eye"></i> Détails
+                </button>
+                <button class="btn btn-sm btn-warning fs-6" (click)="openReconsiderationModal(demande)">
+                  <i class="fa fa-sync"></i> Reconsidérer
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Pagination -->
+        <div class="d-flex justify-content-between align-items-center mt-3 fs-5">
+          <div>
+            <select class="form-select form-select-sm fs-5" [(ngModel)]="itemsPerPage" (change)="onItemsPerPageChange()">
+              <option [value]="5">5 par page</option>
+              <option [value]="10">10 par page</option>
+              <option [value]="20">20 par page</option>
+              <option [value]="50">50 par page</option>
+            </select>
+          </div>
+          <pagination-controls
+            (pageChange)="onPageChange($event)"
+            previousLabel="Précédent"
+            nextLabel="Suivant">
+          </pagination-controls>
+        </div>
+      </div>
+
+      <!-- Message si aucune demande -->
+      <div *ngIf="!loading && filteredDemandes.length === 0" class="alert alert-info fs-5">
+        Aucune demande rejetée n'a été trouvée.
+      </div>
+    </div>
+  </div>
+
+<!-- Modal pour reconsidérer une demande -->
+<div class="modal fade" id="reconsiderationModal" tabindex="-1" aria-labelledby="reconsiderationModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-warning">
+        <h5 class="modal-title fs-4" id="reconsiderationModalLabel">Reconsidérer la demande</h5>
+        <button type="button" class="btn-close" (click)="closeModal('reconsiderationModal')" aria-label="Close"></button>
+      </div>
+      <div class="modal-body fs-5">
+        <p>Êtes-vous sûr de vouloir reconsidérer cette demande ? Elle sera remise en cours de traitement.</p>
+        <p><strong>Demande :</strong> #{{ selectedDemande?.id }} - {{ selectedDemande?.codeDemande }}</p>
+        <p><strong>Motif initial du rejet :</strong> {{ selectedDemande?.motifRejet || 'Non spécifié' }}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary fs-5" (click)="closeModal('reconsiderationModal')">Annuler</button>
+        <button type="button" class="btn btn-warning fs-5" (click)="reconsidererDemande()">Confirmer la reconsidération</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Ajouter plus d'espace entre les colonnes */
+  .table th, .table td {
+    padding: 0.75rem 1rem;
+  }
+
+  /* Option alternative pour encore plus d'espace */
+  .table-wider-padding th, .table-wider-padding td {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  /* Amélioration de l'affichage du texte muted */
+  .text-muted {
+    font-style: italic;
+  }
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="container mt-4">
+
+    <div class="card-body fs-5">
+      <! Barre de recherche -->
+      <!-- <div class="form-group mb-4">
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control fs-5"
+            placeholder="Rechercher une demande..."
+            [(ngModel)]="searchTerm"
+            (keyup)="filterDemandes()">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary fs-5" type="button">
+              <i class="fa fa-search"></i> Rechercher
+            </button>
+          </div>
+        </div>
+      </div> -->
+      <!-- Message de chargement -->
+      <!-- <div *ngIf="loading" class="text-center fs-5">
+        <div class="spinner-border text-danger" role="status">
+          <span class="sr-only">Chargement...</span>
+        </div>
+        <p>Chargement des demandes rejetées...</p>
+      </div> -->
+      <!-- Message d'erreur -->
+      <!-- <div *ngIf="error" class="alert alert-danger fs-5">
+        {{ errorMessage }}
+      </div> -->
+      <!-- Tableau des demandes -->
+      <!-- <div class="table-responsive" *ngIf="!loading && filteredDemandes.length > 0">
+        <table class="table table-striped table-hover">
+          <thead class="thead-dark">
+            <tr class="fs-5">
+              <th class="px-2">N°</th>
+              <th class="px-2">Code Demande</th>
+              <th class="px-2">Type de Demande</th> -->
+              <!-- <th class="px-2">Demandeur</th> -->
+              <!-- <th class="px-2">Statut</th>
+              <th class="px-2">Date de Rejet</th>
+              <th class="px-2">Motif du Rejet</th>
+              <th class="px-2">Actions</th>
+            </tr>
+          </thead> -->
+          <!-- <tbody>
+            <tr class="fs-5" *ngFor="let demande of filteredDemandes | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage, totalItems: totalItems }">
+               <td class="px-3">{{ demande.id }}</td>
+              <td class="px-3">{{ demande.codeDemande }}</td>
+               <td class="px-3">{{ demande.typeDemande}}</td> -->
+              <!-- <td class="px-3">{{ demande.typeDemandeur }}</td> -->
+              <!-- <td class="px-3">
+                <span class="badge bg-danger text-white fs-6">{{ demande.statut || 'REJETÉ' }}</span>
+              </td>
+             <td class="px-3">{{ demande.dateRejet ? (demande.dateRejet | date:'dd/MM/yyyy') : 'Non disponible' }}</td>
+              <td class="px-3">{{ demande.motifRejet || 'Non spécifié' }}</td>
+              <td class="px-3">
+                <button class="btn btn-sm btn-info me-2 fs-6" [routerLink]="['/details-demande', demande.id]">
+                  <i class="fa fa-eye"></i> Détails
+                </button>
+                <button class="btn btn-sm btn-warning fs-6" (click)="openReconsiderationModal(demande)">
+                  <i class="fa fa-sync"></i> Reconsidérer
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table> -->
+        <!-- Pagination -->
+        <!-- <div class="d-flex justify-content-between align-items-center mt-3 fs-5">
+          <div>
+            <select class="form-select form-select-sm fs-5" [(ngModel)]="itemsPerPage" (change)="onItemsPerPageChange()">
+              <option [value]="5">5 par page</option>
+              <option [value]="10">10 par page</option>
+              <option [value]="20">20 par page</option>
+              <option [value]="50">50 par page</option>
+            </select>
+          </div>
+          <pagination-controls
+            (pageChange)="onPageChange($event)"
+            previousLabel="Précédent"
+            nextLabel="Suivant">
+          </pagination-controls>
+        </div>
+      </div> -->
+      <!-- Message si aucune demande -->
+      <!-- <div *ngIf="!loading && filteredDemandes.length === 0" class="alert alert-info fs-5">
+        Aucune demande rejetée n'a été trouvée.
+      </div>
+    </div>
+  </div>
+ -->
+
+<!-- Modal pour saisir le motif du rejet -->
+<!-- <div class="modal fade" id="rejetModal" tabindex="-1" aria-labelledby="rejetModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title fs-4" id="rejetModalLabel">Rejeter la demande</h5>
+        <button type="button" class="btn-close" (click)="closeModal('rejetModal')" aria-label="Close"></button>
+      </div>
+      <div class="modal-body fs-5">
+        <form>
+          <div class="mb-3">
+            <label for="motifRejet" class="form-label">Motif du rejet <span class="text-danger">*</span></label>
+            <textarea
+              class="form-control fs-5"
+              id="motifRejet"
+              rows="4"
+              [(ngModel)]="motifRejet"
+              name="motifRejet"
+              placeholder="Veuillez saisir le motif du rejet..."
+              required></textarea>
+            <div *ngIf="motifRejetError" class="text-danger mt-2">
+              Le motif du rejet est obligatoire.
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary fs-5" (click)="closeModal('rejetModal')">Annuler</button>
+        <button type="button" class="btn btn-danger fs-5" [disabled]="!motifRejet" (click)="confirmerRejet()">Confirmer le rejet</button>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<!-- Modal pour reconsidérer une demande -->
+<!-- <div class="modal fade" id="reconsiderationModal" tabindex="-1" aria-labelledby="reconsiderationModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-warning">
+        <h5 class="modal-title fs-4" id="reconsiderationModalLabel">Reconsidérer la demande</h5>
+        <button type="button" class="btn-close" (click)="closeModal('reconsiderationModal')" aria-label="Close"></button>
+      </div>
+      <div class="modal-body fs-5">
+        <p>Êtes-vous sûr de vouloir reconsidérer cette demande ? Elle sera remise en cours de traitement.</p>
+        <p><strong>Demande :</strong> #{{ selectedDemande?.id }} - {{ selectedDemande?.codeDemande }}</p>
+        <p><strong>Motif initial du rejet :</strong> {{ selectedDemande?.motifRejet || 'Non spécifié' }}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary fs-5" (click)="closeModal('reconsiderationModal')">Annuler</button>
+        <button type="button" class="btn btn-warning fs-5" (click)="reconsidererDemande()">Confirmer la reconsidération</button>
+      </div>
+    </div>
+  </div>
+</div> -->
+

@@ -1,0 +1,231 @@
+<div class="container mt-4">
+  <div class="card">
+    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+      <h4>Détails de la demande</h4>
+      <button class="btn btn-light" (click)="retourListe()">
+        <i class="fa fa-arrow-left"></i> Retour à la liste
+      </button>
+    </div>
+
+    <div class="card-body">
+      <!-- Message de chargement -->
+      <div *ngIf="loading" class="text-center">
+        <div class="spinner-border text-primary" role="status">
+          <span class="sr-only">Chargement...</span>
+        </div>
+        <p>Chargement des détails de la demande...</p>
+      </div>
+
+      <!-- Message d'erreur -->
+      <div *ngIf="error" class="alert alert-danger">
+        {{ errorMessage }}
+      </div>
+
+      <!-- Détails de la demande -->
+      <div *ngIf="!loading && demande">
+        <div class="row mb-4">
+          <div class="col-md-12">
+            <div class="alert" [ngClass]="{'alert-warning': demande.statut === 'EN_COURS',
+                                           'alert-success': demande.statut === 'ACCEPTE' || demande.statut === 'VALIDE',
+                                           'alert-danger': demande.statut === 'REJETE'}">
+              <strong>Statut de la demande:</strong> {{ demande.statut }}
+              <span *ngIf="demande.motifRejet" class="ms-3">
+                <strong>Motif du rejet:</strong> {{ demande.motifRejet }}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Informations générales de la demande -->
+        <div class="card mb-4">
+          <div class="card-header bg-info text-white">
+            <h5>Informations générales</h5>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-6">
+                <p><strong>Code demande:</strong> {{ demande.codeDemande }}</p>
+                <p><strong>Type demandeur:</strong> {{ demande.typeDemandeur }}</p>
+                <p><strong>Type demande:</strong> {{ demande.typeDemande }}</p>
+              </div>
+              <div class="col-md-6">
+                <p><strong>Date de dépôt:</strong> {{ demande.dateDepot | date:'dd/MM/yyyy HH:mm' }}</p>
+
+                <p *ngIf="demande.prix"><strong>Prix:</strong> {{ demande.prix }} FCFA</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Informations du demandeur -->
+        <div class="card mb-4">
+          <div class="card-header bg-info text-white">
+            <h5>Informations du demandeur</h5>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-bordered">
+                <tbody>
+                  <!-- Si c'est un demandeur physique -->
+                  <ng-container *ngIf="demande.typeDemandeur === 'Personne physique'">
+                    <tr>
+                      <th>Nom</th>
+                      <td>{{getPersonnePhysiqueInfo('nom') }}</td>
+                    </tr>
+                    <tr>
+                      <th>Prénom</th>
+                      <td>{{ getPersonnePhysiqueInfo('prenom') }}</td>
+                    </tr>
+                    <tr>
+                      <th>Genre</th>
+                      <td>{{ getPersonnePhysiqueInfo('genre')}}</td>
+                    </tr>
+                    <tr>
+                      <th>Date de naissance</th>
+                      <td>{{ getPersonnePhysiqueInfo('dateNaissance') | date:'dd/MM/yyyy' }}</td>
+                    </tr>
+                    <tr>
+                      <th>Ville de résidence</th>
+                      <td>{{ getPersonnePhysiqueInfo('villeResidance') }}</td>
+                    </tr>
+                    <tr>
+                      <th>Nationalité</th>
+                      <td>{{ getPersonnePhysiqueInfo('nationalite') }}</td>
+                    </tr>
+                    <tr>
+                      <th>Type de pièce d'identité</th>
+                      <td>{{getPersonnePhysiqueInfo('typePiece')}}</td>
+                    </tr>
+                    <tr>
+                      <th>Numéro de pièce</th>
+                      <td>{{ getPersonnePhysiqueInfo('numPiece') }}</td>
+                    </tr>
+                    <tr>
+                      <th>Email</th>
+                      <td>{{getPersonnePhysiqueInfo('mailPersonnePhysique')}}</td>
+                    </tr>
+                    <tr>
+                      <th>Téléphone principal</th>
+                      <td>{{ getPersonnePhysiqueInfo('telephone1PersonnePhysique') }}</td>
+                    </tr>
+                    <tr *ngIf="demande.telephone2PersonnePhysique">
+                      <th>Téléphone secondaire</th>
+                      <td>{{ getPersonnePhysiqueInfo('telephone2PersonnePhysique') }}</td>
+                    </tr>
+                  </ng-container>
+
+                  <!-- Si c'est un demandeur moral -->
+                  <ng-container *ngIf="demande.typeDemandeur === 'Personne morale'">
+                    <tr>
+                      <th>Dénomination</th>
+                      <td>{{ getPersonneMoraleinfo('denomination') }}</td>
+                    </tr>
+                    <tr>
+                      <th>IFU</th>
+                      <td>{{ getPersonneMoraleinfo('ifu')}}</td>
+                    </tr>
+                    <tr>
+                      <th>Siège</th>
+                      <td>{{ getPersonneMoraleinfo('siege') }}</td>
+                    </tr>
+                    <tr>
+                      <th>Nom du responsable</th>
+                      <td>{{ getPersonneMoraleinfo('nomResponsable') }}</td>
+                    </tr>
+                    <tr>
+                      <th>Prénom du responsable</th>
+                      <td>{{ getPersonneMoraleinfo('prenomResponsable') }}</td>
+                    </tr>
+                    <tr>
+                      <th>Email</th>
+                      <td>{{ getPersonneMoraleinfo('mailPersonneMorale') }}</td>
+                    </tr>
+                    <tr>
+                      <th>Téléphone principal</th>
+                      <td>{{ getPersonneMoraleinfo('telephone1PersonneMolrale') }}</td>
+                    </tr>
+                    <tr *ngIf="demande.telephone2PersonneMorale">
+                      <th>Téléphone secondaire</th>
+                      <td>{{ getPersonneMoraleinfo( 'telephone2PersonneMorale') }}</td>
+                    </tr>
+                  </ng-container>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- Pièces jointes -->
+        <div class="card mb-4">
+          <div class="card-header bg-info text-white">
+            <h5>Pièces jointes</h5>
+          </div>
+          <div class="card-body">
+            <!-- Message de chargement pour les pièces jointes -->
+            <div *ngIf="loadingPieces" class="text-center">
+              <div class="spinner-border text-primary" role="status">
+                <span class="sr-only">Chargement des pièces jointes...</span>
+              </div>
+            </div>
+
+            <!-- Tableau des pièces jointes -->
+            <!-- Tableau des pièces jointes modifié - colonne "Nom du fichier" supprimée -->
+<div *ngIf="!loadingPieces && piecesJointes.length > 0" class="table-responsive">
+  <table class="table table-striped table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th>N°</th>
+        <th>Libellé</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let piece of piecesJointes; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ piece.libelle }}</td>
+        <td>
+          <button class="btn btn-sm btn-primary" (click)="downloadPieceJointe(piece?.fichier || piece?.nomFichier || '')">
+            <i class="fa fa-download"></i> Télécharger
+          </button>
+          <!-- <button class="btn btn-sm btn-primary" (click)="downloadPieceJointe(piece.fichier  || '') ">
+            <i class="fa fa-download"></i> Télécharger
+          </button> -->
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+            <!-- Message si aucune pièce jointe -->
+            <div *ngIf="!loadingPieces && piecesJointes.length === 0" class="alert alert-info">
+              Aucune pièce jointe n'a été trouvée pour cette demande.
+            </div>
+          </div>
+        </div>
+
+        <!-- Actions sur la demande -->
+        <div class="card mb-4" *ngIf="demande.statut === 'EN_COURS'">
+          <div class="card-header bg-info text-white">
+            <h5>Actions</h5>
+          </div>
+          <div class="card-body">
+            <div class="d-flex justify-content-center gap-3">
+              <button class="btn btn-success" (click)="accepterDemande()">
+                <i class="fa fa-check"></i> Accepter la demande
+              </button>
+              <button class="btn btn-danger" (click)="rejeterDemande()">
+                <i class="fa fa-times"></i> Rejeter la demande
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Message si aucune demande trouvée -->
+      <div *ngIf="!loading && !error && !demande" class="alert alert-info">
+        Aucune demande trouvée avec cet identifiant.
+      </div>
+    </div>
+  </div>
+</div>

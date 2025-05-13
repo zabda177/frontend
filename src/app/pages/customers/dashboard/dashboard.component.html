@@ -1,0 +1,124 @@
+<!-- dashboard.component.html -->
+<div class="dashboard">
+  <div class="row">
+    <!-- Menu de navigation à gauche -->
+    <div class="col-2">
+      <app-menu></app-menu>
+    </div>
+
+    <!-- Contenu principal -->
+    <div class="col-10">
+      <h2 class="fs-2 mb-4">Tableau de bord</h2>
+
+      <!-- Zone des statistiques (toujours visible) -->
+      <div class="stats-container mb-4">
+        <div class="row">
+          <!-- Demandes Soumises -->
+          <div class="col-md-3 mb-3">
+            <div class="card stat-card" [ngClass]="{'active': activeSection === 'EN_COURS'}"
+                 (click)="afficherSection('soumises')">
+              <div class="card-body text-center">
+                <h3 class="fs-4 text-primary">Demandes soumises</h3>
+                <div class="total-number text-primary">{{ stats?.demandeEncours || 0 }}</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Demandes Acceptées -->
+          <div class="col-md-3 mb-3">
+            <div class="card stat-card" [ngClass]="{'active': activeSection === 'acceptees'}"
+                 (click)="afficherSection('acceptees')">
+              <div class="card-body text-center">
+                <h3 class="fs-4 text-success">Demandes Acceptées</h3>
+                <div class="total-number text-success">{{ stats?.demandeAccepte || 0 }}</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Demandes Validées -->
+          <div class="col-md-3 mb-3">
+            <div class="card stat-card" [ngClass]="{'active': activeSection === 'validees'}"
+                 (click)="afficherSection('validees')">
+              <div class="card-body text-center">
+                <h3 class="fs-4 text-info">Demandes Validées</h3>
+                <div class="total-number text-info">{{ stats?.demandeValide || 0 }}</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Demandes Rejetées -->
+          <div class="col-md-3 mb-3">
+            <div class="card stat-card" [ngClass]="{'active': activeSection === 'rejetees'}"
+                 (click)="afficherSection('rejetees')">
+              <div class="card-body text-center">
+                <h3 class="fs-4 text-danger">Demandes rejetées</h3>
+                <div class="total-number text-danger">{{ stats?.demandeRejete || 0 }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Zone d'affichage dynamique du contenu -->
+      <div class="content-container mt-4">
+        <!-- Message d'accueil par défaut quand aucune section n'est sélectionnée -->
+        <div *ngIf="!activeSection" class="welcome-message text-center p-5">
+          <h3 class="mb-3">Bienvenue dans votre tableau de bord</h3>
+          <p class="fs-5">Cliquez sur l'une des catégories ci-dessus pour afficher les détails</p>
+        </div>
+
+        <!-- Composant des demandes soumises -->
+        <div *ngIf="activeSection === 'soumises'" class="dynamic-content">
+          <div class="card">
+            <div class="card-header bg-primary text-white">
+              <h4>Liste des demandes soumises</h4>
+            </div>
+            <div class="card-body">
+              <!-- Insérer le contenu du composant demandes-soumises ici -->
+              <app-demande-soumise></app-demande-soumise>
+            </div>
+          </div>
+        </div>
+
+        <!-- Composant des demandes acceptées -->
+        <div *ngIf="activeSection === 'acceptees'" class="dynamic-content">
+          <div class="card">
+            <div class="card-header bg-success text-white">
+              <h4>Liste des demandes acceptées</h4>
+            </div>
+            <div class="card-body">
+              <!-- Insérer le contenu du composant demandes-acceptees ici -->
+              <app-demandes-acceptees></app-demandes-acceptees>
+            </div>
+          </div>
+        </div>
+
+        <!-- Composant des demandes validées -->
+        <div *ngIf="activeSection === 'validees'" class="dynamic-content">
+          <div class="card">
+            <div class="card-header bg-info text-white">
+              <h4>Liste des demandes validées</h4>
+            </div>
+            <div class="card-body">
+              <!-- Insérer le contenu du composant demandes-validees ici -->
+              <app-demandes-validees></app-demandes-validees>
+            </div>
+          </div>
+        </div>
+
+        <!-- Composant des demandes rejetées -->
+        <div *ngIf="activeSection === 'rejetees'" class="dynamic-content">
+          <div class="card">
+            <div class="card-header bg-danger text-white">
+              <h4>Liste des demandes rejetées</h4>
+            </div>
+            <div class="card-body">
+              <!-- Insérer le contenu du composant demandes-rejetees ici -->
+              <app-demandes-rejete></app-demandes-rejete>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

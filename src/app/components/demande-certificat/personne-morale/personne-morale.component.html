@@ -1,0 +1,157 @@
+<div class="row mt-5">
+  <form [formGroup]="personneMoraleForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <!-- Première colonne -->
+      <div class="col col-md-6">
+        <div class="mb-3 row">
+          <label for="typeDemande" class="col-sm-4 col-form-label"
+            >Choisissez le Type de Demande</label
+          >
+          <div class="col-sm-8">
+            <select
+              formControlName="typeDemande"
+              class="form-control"
+              id="typeDemande"
+            >
+              <option value="">Sélectionner le type de Demande</option>
+              <option value="licenceGuide">Licence Guide</option>
+              <option value="etablissement">Établissement</option>
+              <option value="permiPeche">Permis de Pêche</option>
+              <option value="licenceCommerciale">Licence Commerciale</option>
+              <option value="agrementConcession">
+                Agréments et Concessions
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="mb-3 row">
+          <label for="ifu" class="col-sm-4 col-form-label">N° IFU </label>
+          <div class="col-sm-8">
+            <input
+              formControlName="ifu"
+              type="text"
+              class="form-control"
+              id="ifu"
+              placeholder="Numéro Recepissé pour Les Associations"
+            />
+          </div>
+        </div>
+        <div class="mb-3 row">
+          <label for="denomination" class="col-sm-4 col-form-label"
+            >Denomination
+          </label>
+          <div class="col-sm-8">
+            <input
+              formControlName="denomination"
+              type="text"
+              class="form-control"
+              id="denomination"
+              placeholder=" Nom de la structure"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3 row">
+          <label for="nomResponsable" class="col-sm-4 col-form-label">
+           Nom du Responsable</label
+          >
+          <div class="col-sm-8">
+            <input
+              formControlName="nomResponsable"
+              type="text"
+              class="form-control"
+              id="nomResponsable"
+              placeholder="Nom du Responsable"
+            />
+          </div>
+          </div>
+
+          <div class="mb-3 row">
+            <label for="prenomResponsable" class="col-sm-4 col-form-label">
+             Nom du Responsable</label
+            >
+            <div class="col-sm-8">
+              <input
+                formControlName="prenomResponsable"
+                type="text"
+                class="form-control"
+                id="prenomResponsable"
+                placeholder="Prenom du Responsable"
+              />
+            </div>
+        </div>
+
+        <div class="mb-3 row">
+          <label for="siege" class="col-sm-4 col-form-label"
+            >Siège Socialle
+          </label>
+          <div class="col-sm-8">
+            <input
+              formControlName="siege"
+              type="text"
+              class="form-control"
+              id="siege"
+            />
+          </div>
+        </div>
+        <div class="mb-3 row">
+          <label for="mailPersonneMorale" class="col-sm-4 col-form-label">Email</label>
+          <div class="col-sm-8">
+            <input
+              formControlName="mailPersonneMorale"
+              type="email"
+              class="form-control"
+              id="mailPersonneMorale"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="col col-md-6">
+        <div class="mb-3 row">
+          <label for="telephone1PersonneMorale" class="col-sm-4 col-form-label"
+            >Téléphone 1</label
+          >
+          <div class="col-sm-8">
+            <input
+              formControlName="telephone1PersonneMorale"
+              type="text"
+              class="form-control"
+              id="telephone1PersonneMorale"
+            />
+          </div>
+        </div>
+        <div class="mb-3 row">
+          <label for="telephone2PersonneMorale" class="col-sm-4 col-form-label"
+            >Téléphone 2</label
+          >
+          <div class="col-sm-8">
+            <input
+              formControlName="telephone2PersonneMorale"
+              type="text"
+              class="form-control"
+              id="telephone2PersonneMorale"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Boutons -->
+    <div class="row">
+      <div class="mb-3 col-md-6"></div>
+      <div class="mb-3 col-md-6 text-end">
+        <button
+          class="btn btn-success"
+          type="button"
+          (click)="onSubmit()"
+          [disabled]="personneMoraleForm.invalid"
+          cdkStepperNext
+        >
+          Suivant <i class="bi bi-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+<!-- Message de succès si le formulaire est valide -->
+<div *ngIf="formValide" class="alert alert-success mt-3">Formulaire Valide</div>

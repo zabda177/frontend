@@ -1,0 +1,129 @@
+<div class="row mt-5">
+  <div class="row">
+    <!-- Première colonne -->
+    <div class="col col-md-6">
+      <div class="mb-3 row">
+        <label for="demande" class="col-sm-4 col-form-label">
+          Demande manuscrite <span class="text-red-500">*</span>
+        </label>
+        <div class="col-sm-8">
+          <input
+            type="file"
+            class="form-control"
+            id="demande"
+            (change)="onFileSelect($event, 'demande')"
+          />
+        </div>
+      </div>
+
+      <div class="mb-3 row">
+        <label for="cnib" class="col-sm-4 col-form-label">
+          Document d'Identité <span class="text-red-500">*</span>
+        </label>
+        <div class="col-sm-8">
+          <input
+            type="file"
+            class="form-control"
+            id="cnib"
+            (change)="onFileSelect($event, 'cnib')"
+          />
+        </div>
+      </div>
+
+      <div class="mb-3 row">
+        <label for="rapportActivite" class="col-sm-4 col-form-label">
+          Rapport d'activité <span class="text-red-500">*</span>
+        </label>
+        <div class="col-sm-8">
+          <input
+            type="file"
+            class="form-control"
+            id="rapportActivite"
+            (change)="onFileSelect($event, 'rapportActivite')"
+          />
+        </div>
+      </div>
+
+      <div class="mb-3 row">
+        <label for="impot" class="col-sm-4 col-form-label">
+          Attestation fiscale <span class="text-red-500">*</span>
+        </label>
+        <div class="col-sm-8">
+          <input
+            type="file"
+            class="form-control"
+            id="impot"
+            (change)="onFileSelect($event, 'impot')"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- Deuxième colonne -->
+    <div class="col col-md-6">
+      <div class="mb-3 row">
+        <label for="attestationFormation" class="col-sm-4 col-form-label">
+          Attestation de formation <span class="text-red-500">*</span>
+        </label>
+        <div class="col-sm-8">
+          <input
+            type="file"
+            class="form-control"
+            id="attestationFormation"
+            (change)="onFileSelect($event, 'attestationFormation')"
+          />
+        </div>
+      </div>
+
+      <div class="mb-3 row">
+        <label for="planAffaire" class="col-sm-4 col-form-label">
+          Plan d'affaire <span class="text-red-500">*</span>
+        </label>
+        <div class="col-sm-8">
+          <input
+            type="file"
+            class="form-control"
+            id="planAffaire"
+            (change)="onFileSelect($event, 'planAffaire')"
+          />
+        </div>
+      </div>
+
+      <div class="mb-3 row">
+        <label for="quittance" class="col-sm-4 col-form-label">
+          Quittance de versement <span class="text-red-500">*</span>
+        </label>
+        <div class="col-sm-8">
+          <input
+            type="file"
+            class="form-control"
+            id="quittance"
+            (change)="onFileSelect($event, 'quittance')"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Boutons de navigation -->
+  <div class="row">
+    <div class="mb-3 col-md-6">
+      <button class="btn btn-danger" type="button" cdkStepperPrevious>
+        <i class="bi bi-arrow-left"></i> Précédent
+      </button>
+    </div>
+    <div class="mb-3 col-md-6 text-end">
+      <button
+        class="btn btn-success"
+        type="submit"
+        (click)="onFileSave()"
+        cdkStepperNext
+      >
+        Suivant <i class="bi bi-arrow-right"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+
+

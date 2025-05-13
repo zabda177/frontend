@@ -1,0 +1,96 @@
+<div class="row mt-5">
+  <form enctype="multipart/form-data" (submit)="onFileSave($event)">
+    <!-- Première colonne -->
+    <div class="row">
+      <div class="col-md-6">
+        <div class="mb-3 row">
+          <label for="demande" class="col-sm-4 col-form-label"
+            >Demande timbrée</label
+          >
+          <div class="col-sm-8">
+            <input
+              type="file"
+              class="form-control"
+              id="demande"
+              name="demande"
+              (change)="onFileSelect($event, 'demande')"
+            />
+          </div>
+        </div>
+        <div class="mb-3 row">
+          <label for="cnib" class="col-sm-4 col-form-label"
+            >Document d'Identité</label
+          >
+          <div class="col-sm-8">
+            <input
+              type="file"
+              class="form-control"
+              id="cnib"
+              name="cnib"
+              (change)="onFileSelect($event, 'cnib')"
+            />
+          </div>
+        </div>
+      </div>
+      <!-- Deuxième colonne -->
+      <div class="col-md-6">
+        <div class="mb-3 row">
+          <label for="certificatNationalite" class="col-sm-4 col-form-label"
+            >Certificat de Nationalité</label
+          >
+          <div class="col-sm-8">
+            <input
+              type="file"
+              class="form-control"
+              id="certificatNationalite"
+              name="certificatNationalite"
+              (change)="onFileSelect($event, 'certificatNationalite')"
+            />
+          </div>
+        </div>
+        <div class="mb-3 row">
+          <label for="photo" class="col-sm-4 col-form-label">Photo</label>
+          <div class="col-sm-8">
+            <input
+              type="file"
+              class="form-control"
+              id="photo"
+              name="photo"
+              (change)="onFileSelect($event, 'photo')"
+            />
+          </div>
+        </div>
+        <div class="mb-3 row">
+          <label for="quittance" class="col-sm-4 col-form-label"
+            >Quittances de versement</label
+          >
+          <div class="col-sm-8">
+            <input
+              type="file"
+              class="form-control"
+              id="quittance"
+              name="quittance"
+              (change)="onFileSelect($event, 'quittance')"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Boutons -->
+    <div class="row">
+      <div class="mb-3 col-md-6">
+        <button class="btn btn-danger" type="button" cdkStepperPrevious>
+          <i class="bi bi-arrow-left"></i> Précédent
+        </button>
+      </div>
+      <div class="mb-3 col-md-6 text-end">
+        <button class="btn btn-success" type="submit">
+          Valider et suivant <i class="bi bi-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+  </form>
+
+  <!-- Bouton invisible pour navigation programmée -->
+  <button #nextButton cdkStepperNext style="display: none;"></button>
+</div>

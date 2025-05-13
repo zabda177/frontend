@@ -1,0 +1,31 @@
+.cover-image {
+  width: 100%; /* ou la largeur désirée */
+  height: 100vh; /* ou la hauteur désirée */
+  background-image: url('/assets/images/frame.jpg'); /* Utiliser le chemin relatif correct */
+  background-size: cover; /* Assure que l'image couvre l'élément */
+  background-position: center; /* Centre l'image */
+  background-repeat: no-repeat; /* Évite de répéter l'image */
+}
+
+.container-fluid {
+  height: 100vh; /* Assure que le conteneur prend toute la hauteur de la fenêtre */
+}
+
+.row.cover-image {
+  height: 100vh; /* Assure que la ligne prend toute la hauteur de la fenêtre */
+}
+
+.col.col-md-6 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centre verticalement */
+  align-items: center; /* Centre horizontalement */
+}
+
+.w-100 {
+  width: 100%; /* Assure que le conteneur du formulaire prend toute la largeur disponible */
+}
+
+.form-control {
+  width: 100%; /* Assure que les champs de formulaire prennent toute la largeur du conteneur */
+}

@@ -1,0 +1,27 @@
+<div class="container-fluid cover-image d-flex justify-content-center align-items-center" style="height: 100vh;">
+  <div class="col col-md-4"
+       style="border: gray solid 1px; padding: 30px; border-radius: 5px; background-color: white; height: 40vh;">
+    <div class="row text-center mb-4">
+      <h3>Connexion</h3>
+      <span>Heureux de vous revoir</span>
+    </div>
+    <form (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <input type="text" class="form-control" placeholder="Login">
+      </div>
+      <div class="mb-3">
+        <input type="password" class="form-control" placeholder="Mot de passe">
+      </div>
+      <div class="row">
+        <div class="col col-md-7">
+          Mot de passe <a href="#" style="text-decoration: none;">oublié ?</a>
+        </div>
+        <div class="col col-md-5 text-end">
+          <button type="submit" class="btn btn-primary">
+            Se connecter <i class="bi bi-box-arrow-in-right"></i>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,197 @@
+<div class="row mt-5">
+  <form [formGroup]="demandeurForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <!-- Première colonne -->
+
+    <div class="row mb-4">
+    <div class="col-sm-6">
+
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Sélectionner le type de Demande</mat-label>
+        <mat-select formControlName="typeDemande"  id="typeDemande" required>
+
+          <mat-option value="licenceGuide">Licence Guide</mat-option>
+          <mat-option value="etablissement">Création d'un Établissement</mat-option>
+          <mat-option value="permiPeche">Permis de Pêche</mat-option>
+          <mat-option value="licenceCommerciale">Licence Commerciale</mat-option>
+          <mat-option value="agrementConcession">Agréments et Concessions</mat-option>
+        </mat-select>
+
+      </mat-form-field>
+    </div>
+    </div>
+
+
+      <div class="col col-md-6">
+        <div class="mb-3 row">
+          <label for="nom" class="col-sm-4 col-form-label">Nom</label>
+          <div class="col-sm-8">
+            <input
+              formControlName="nom"
+              type="text"
+              class="form-control"
+              id="nom"
+              placeholder="Nom du responsable"
+            />
+          </div>
+        </div>
+        <div class="mb-3 row">
+          <label for="prenom" class="col-sm-4 col-form-label">Prénom</label>
+          <div class="col-sm-8">
+            <input
+              formControlName="prenom"
+              type="text"
+              class="form-control"
+              id="prenom"
+              placeholder="Prenom du responsable"
+            />
+          </div>
+        </div>
+
+
+
+        <div class="mb-3 row">
+          <label for="mailPersonnePhysique" class="col-sm-4 col-form-label">Email</label>
+          <div class="col-sm-8">
+            <input
+              formControlName="mailPersonnePhysique"
+              type="email"
+              class="form-control"
+              id="mailPersonnePhysique"
+            />
+          </div>
+        </div>
+        <div class="mb-3 row">
+          <label for="dateNaissance" class="col-sm-4 col-form-label"
+            >Date de Naissance</label
+          >
+          <div class="col-sm-8">
+            <input
+              formControlName="dateNaissance"
+              type="date"
+              class="form-control"
+              id="dateNaissance"
+            />
+          </div>
+        </div>
+        <div class="mb-3 row">
+          <label for="nationalite" class="col-sm-4 col-form-label"
+            >Nationalité</label
+          >
+          <div class="col-sm-8">
+            <input
+              formControlName="nationalite"
+              type="text"
+              class="form-control"
+              id="nationalite"
+            />
+          </div>
+        </div>
+
+
+        <div class="mb-3 row">
+          <label for="genre" class="col-sm-4 col-form-label">Genre</label>
+          <div class="col-sm-8">
+            <select formControlName="genre" class="form-control" id="genre">
+              <option value="masculin">Masculin</option>
+              <option value="feminin">Féminin</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Deuxième colonne -->
+      <div class="col col-md-6">
+        <div class="mb-3 row">
+          <label for="telephone1PersonnePhysique" class="col-sm-4 col-form-label"
+            >Téléphone 1</label
+          >
+          <div class="col-sm-8">
+            <input
+              formControlName="telephone1PersonnePhysique"
+              type="text"
+              class="form-control"
+              id="telephone1PersonnePhysique"
+            />
+          </div>
+        </div>
+        <div class="mb-3 row">
+          <label for="telephone2PersonnePhysique" class="col-sm-4 col-form-label"
+            >Téléphone 2</label
+          >
+          <div class="col-sm-8">
+            <input
+              formControlName="telephone2PersonnePhysique"
+              type="text"
+              class="form-control"
+              id="telephone2PersonnePhysique"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3 row">
+          <label for="villeResidance" class="col-sm-4 col-form-label"
+            >Ville de résidence</label
+          >
+          <div class="col-sm-8">
+            <input
+              formControlName="villeResidance"
+              type="text"
+              class="form-control"
+              id="villeResidance"
+            />
+          </div>
+        </div>
+        <div class="mb-3 row">
+          <label for="typePiece" class="col-sm-4 col-form-label"
+            >Pièce d'Identité</label
+          >
+          <div class="col-sm-8">
+            <select
+              formControlName="typePiece"
+              class="form-control"
+              id="typePiece"
+            >
+              <option value="cnib">CNIB</option>
+              <option value="passport">PASSEPORT</option>
+            </select>
+          </div>
+        </div>
+        <div class="mb-3 row">
+          <label for="numPiece" class="col-sm-4 col-form-label"
+            >Numéro de la Pièce</label
+          >
+          <div class="col-sm-8">
+            <input
+              formControlName="numPiece"
+              type="text"
+              class="form-control"
+              id="numPiece"
+            />
+          </div>
+        </div>
+      </div>
+
+
+    <!-- Boutons -->
+    <div class="row">
+      <div class="mb-3 col-md-6"></div>
+      <div class="mb-3 col-md-6 text-end">
+        <button
+          class="btn btn-success"
+          type="button"
+          (click)="onSubmit()"
+          [disabled]="demandeurForm.invalid"
+          cdkStepperNext
+        >
+          Suivant <i class="bi bi-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+
+
+  <!-- Message de succès si le formulaire est valide -->
+  <div *ngIf="formValide" class="alert alert-success mt-3">
+    Formulaire Valide
+  </div>
+

@@ -1,0 +1,9 @@
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+mat-form-field {
+  width: 100%;
+}
+
+/* Si vous avez besoin d'ajuster la hauteur pour correspondre à vos autres contrôles */
+::ng-deep .mat-form-field-flex {
+  min-height: 56px;
+}

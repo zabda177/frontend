@@ -1,0 +1,35 @@
+.header {
+  background-color: #198753;
+  color: white;
+}
+
+.logo {
+  width: 80px;
+  height: 80px;
+}
+
+/* Nouvelles classes pour augmenter la taille des polices dans le header */
+.header nav a {
+  font-size: 1.25rem; /* Taille plus grande pour les boutons de navigation */
+  font-weight: 500; /* Légèrement plus gras pour une meilleure lisibilité */
+}
+
+.info-bar {
+  background-color: #f8f9fa;
+}
+
+.main-content {
+  background-color: white;
+}
+
+.footer {
+  background-color: #198753;
+  color: white;
+}
+
+.feature-icon {
+  font-size: 3rem;
+  color: #198753;
+}
+
+footer {position: absolute; bottom: 0; left: 0; right: 0}

@@ -1,0 +1,119 @@
+<div class="row mt-5">
+  <form enctype="multipart/form-data" action="/submit" method="post">
+    <div class="row">
+      <!-- Première colonne -->
+      <div class="col col-md-6">
+        <div class="mb-3 row">
+          <label for="demande" class="col-sm-4 col-form-label"
+            >Demande timbrée</label
+          >
+          <div class="col-sm-8">
+            <input
+              type="file"
+              class="form-control"
+              id="demande"
+              (change)="onFileSelect($event, 'demande')"
+            />
+          </div>
+        </div>
+        <div class="mb-3 row">
+          <label for="cnib" class="col-sm-4 col-form-label"
+            >Document d'Identité</label
+          >
+          <div class="col-sm-8">
+            <input
+              type="file"
+              class="form-control"
+              id="cnib"
+              (change)="onFileSelect($event, 'cnib')"
+            />
+          </div>
+        </div>
+        <div class="mb-3 row">
+          <label for="reconnaissance" class="col-sm-4 col-form-label"
+            >Document Personne Morale</label
+          >
+          <div class="col-sm-8">
+            <input
+              type="file"
+              class="form-control"
+              id="reconnaissance"
+              (change)="onFileSelect($event, 'reconnaissance')"
+            />
+          </div>
+        </div>
+        <div class="mb-3 row">
+          <label for="listeMembre" class="col-sm-4 col-form-label"
+            >Liste des membres</label
+          >
+          <div class="col-sm-8">
+            <input
+              type="file"
+              class="form-control"
+              id="listeMembre"
+              (change)="onFileSelect($event, 'listeMembre')"
+            />
+          </div>
+        </div>
+        <div class="mb-3 row">
+          <label for="engagement" class="col-sm-4 col-form-label">
+            Engagement Signé</label
+          >
+          <div class="col-sm-8">
+            <input
+              type="file"
+              class="form-control"
+              id="engagement"
+              (change)="onFileSelect($event, 'engagement')"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="col col-md-6">
+        <div class="mb-3 row">
+          <label for="photo" class="col-sm-4 col-form-label"
+            >Photo d'identité</label
+          >
+          <div class="col-sm-8">
+            <input
+              type="file"
+              class="form-control"
+              id="photo"
+              (change)="onFileSelect($event, 'photo')"
+            />
+          </div>
+        </div>
+        <div class="mb-3 row">
+          <label for="quittance" class="col-sm-4 col-form-label"
+            >Quittances de versement</label
+          >
+          <div class="col-sm-8">
+            <input
+              type="file"
+              class="form-control"
+              id="quittance"
+              (change)="onFileSelect($event, 'quittance')"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Boutons -->
+    <div class="row">
+      <div class="mb-3 col-md-6">
+        <button class="btn btn-danger" type="button" cdkStepperPrevious>
+          <i class="bi bi-arrow-left"></i> Précédent
+        </button>
+      </div>
+      <div class="mb-3 col-md-6 text-end">
+        <button
+          class="btn btn-success"
+          type="button"
+          (click)="onFileSave()"
+        >
+          Suivant <i class="bi bi-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,197 @@
+/* Barre d'information */
+.info-bar {
+  background-color: #f8f9fa;
+  padding: 0.5rem 0;
+}
+
+.messagedefilant {
+  font-size: 1.1rem; /* Taille moyenne pour le message défilant */
+  color: #333;
+  line-height: 1.5;
+  overflow: hidden;
+  white-space: nowrap;
+  animation: defilement 15s linear infinite;
+}
+
+@keyframes defilement {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* Contenu principal */
+.main-content {
+  background-color: #fff;
+  min-height: 70vh;
+}
+
+/* En-tête central */
+.text-center h2 {
+  font-size: 1.6rem; /* Taille moyenne pour le titre principal */
+  color: #333;
+  font-weight: 600;
+  margin-top: 1rem;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.text-center h3 {
+  font-size: 1.3rem; /* Taille moyenne pour les sous-titres */
+  color: #555;
+  font-weight: 500;
+  margin-top: 0.8rem;
+  line-height: 1.3;
+}
+
+/* Logo */
+.logo {
+  margin-bottom: 1.5rem;
+}
+
+/* Colonnes de fonctionnalités */
+.row .col-md-4 {
+  margin-bottom: 2rem;
+}
+
+.col-md-4 h4 {
+  font-size: 1.4rem; /* Taille moyenne pour les titres de section */
+  color: #333;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+
+/* Icônes de fonctionnalités */
+.feature-icon {
+  font-size: 3rem; /* Grande taille pour les icônes */
+  color: #28a745;
+  margin-bottom: 1rem;
+}
+
+/* Boutons */
+.btn {
+  font-size: 1.1rem; /* Taille moyenne pour le texte des boutons */
+  padding: 0.8rem 1.5rem;
+  font-weight: 500;
+  text-transform: none;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-success {
+  background-color: #28a745;
+  border-color: #28a745;
+  color: white;
+}
+
+.btn-success:hover {
+  background-color: #218838;
+  border-color: #1e7e34;
+  transform: translateY(-2px);
+}
+
+.btn i {
+  font-size: 1.1rem;
+}
+
+/* Conteneur principal */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+/* Espacement général */
+.py-5 {
+  padding-top: 3rem !important;
+  padding-bottom: 3rem !important;
+}
+
+.py-2 {
+  padding-top: 1rem !important;
+  padding-bottom: 1rem !important;
+}
+
+.mb-5 {
+  margin-bottom: 3rem !important;
+}
+
+.mb-3 {
+  margin-bottom: 1rem !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .text-center h2 {
+    font-size: 1.4rem;
+    padding: 0 1rem;
+  }
+
+  .text-center h3 {
+    font-size: 1.2rem;
+    padding: 0 1rem;
+  }
+
+  .col-md-4 h4 {
+    font-size: 1.3rem;
+  }
+
+  .btn {
+    font-size: 1rem;
+    padding: 0.7rem 1.3rem;
+  }
+
+  .feature-icon {
+    font-size: 2.5rem;
+  }
+
+  .row {
+    padding: 0 1rem;
+  }
+
+  .col-md-4 {
+    margin-bottom: 2.5rem;
+  }
+}
+
+/* Animation d'apparition */
+.col-md-4 {
+  opacity: 0;
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.col-md-4:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.col-md-4:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Effet au survol des sections */
+.col-md-4:hover {
+  transform: translateY(-5px);
+  transition: transform 0.3s ease;
+}
+
+.col-md-4:hover .feature-icon {
+  transform: scale(1.1);
+  transition: transform 0.3s ease;
+}

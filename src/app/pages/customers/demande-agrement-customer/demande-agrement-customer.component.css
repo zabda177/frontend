@@ -1,0 +1,26 @@
+/* Applique une taille moyenne au texte du stepper */
+::ng-deep .mat-step-header {
+ font-size: 1.1rem; /* Step titles */
+}
+
+/* Agrandir les libellés de champs de formulaire */
+::ng-deep .mat-form-field-label {
+ font-size: 1.1rem;
+}
+
+/* Agrandir le texte dans les champs */
+::ng-deep .mat-input-element {
+ font-size: 1.1rem;
+}
+
+/* Boutons dans les formulaires */
+::ng-deep button,
+::ng-deep .mat-button,
+::ng-deep .mat-raised-button {
+ font-size: 1.1rem;
+}
+
+/* Agrandir le texte général des formulaires */
+::ng-deep form {
+font-size: 1.1rem;
+}

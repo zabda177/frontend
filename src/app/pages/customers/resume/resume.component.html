@@ -1,0 +1,347 @@
+<div class="container mt-4">
+  <div class="card">
+    <div class="card-header bg-primary text-white">
+      <h3 class="mb-0">Résumé de la demande</h3>
+    </div>
+    <div class="card-body">
+      <!-- Type de demandeur et de demande -->
+      <div class="row mb-4">
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header bg-light">
+              <h5 class="mb-0">Informations générales</h5>
+            </div>
+            <div class="card-body">
+              <table class="table table-bordered">
+                <tr>
+                  <th>Type de demandeur</th>
+                  <td>{{ typeDemandeur === 'physique' ? 'Personne physique' : 'Personne morale' }}</td>
+                </tr>
+                <tr>
+                  <th>Type de demande</th>
+                  <td>{{ typeDemandeLabels[typeDemande] || typeDemande }}</td>
+                </tr>
+                <tr *ngIf="demandesData?.codeDemande">
+                  <th>Code de demande</th>
+                  <td>{{ demandesData.codeDemande }}</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Informations du demandeur -->
+      <div class="row mb-4">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header bg-light">
+              <h5 class="mb-0">Informations du demandeur</h5>
+            </div>
+            <div class="card-body">
+              <table class="table table-bordered">
+                <ng-container *ngIf="typeDemandeur === 'physique' && demandeurData">
+                  <tr>
+                    <th>Nom</th>
+                    <td>{{ demandeurData.nom }}</td>
+                    <th>Prénom</th>
+                    <td>{{ demandeurData.prenom }}</td>
+                  </tr>
+                  <tr>
+                    <th>Email</th>
+                    <td>{{ demandeurData.mailPersonnePhysique }}</td>
+                    <th>Date de naissance</th>
+                    <td>{{ demandeurData.dateNaissance | date }}</td>
+                  </tr>
+                  <tr>
+                    <th>Nationalité</th>
+                    <td>{{ demandeurData.nationalite }}</td>
+                    <th>Genre</th>
+                    <td>{{ demandeurData.genre === 'masculin' ? 'Masculin' : 'Féminin' }}</td>
+                  </tr>
+                  <tr>
+                    <th>Téléphone 1</th>
+                    <td>{{ demandeurData.telephone1PersonnePhysique }}</td>
+                    <th>Téléphone 2</th>
+                    <td>{{ demandeurData.telephone2PersonnePhysique || 'Non renseigné' }}</td>
+                  </tr>
+                  <tr>
+                    <th>Ville de résidence</th>
+                    <td>{{ demandeurData.villeResidance }}</td>
+                    <th>Type de pièce</th>
+                    <td>{{ demandeurData.typePiece === 'cnib' ? 'CNIB' : 'PASSEPORT' }}</td>
+                  </tr>
+                  <tr>
+                    <th>Numéro de pièce</th>
+                    <td>{{ demandeurData.numPiece }}</td>
+                    <th></th>
+                    <td></td>
+                  </tr>
+                </ng-container>
+
+                <ng-container *ngIf="typeDemandeur === 'morale' && personneMoraleData">
+                  <tr>
+                    <th>Raison sociale</th>
+                    <td>{{ personneMoraleData.denomination }}</td>
+
+                  </tr>
+                  <tr>
+                    <th>IFU</th>
+                    <td>{{ personneMoraleData.ifu }}</td>
+                     </tr>
+                  <tr>
+                    <th>Téléphone 1</th>
+                    <td>{{ personneMoraleData.telephone1PersonneMorale }}</td>
+                    <th>Téléphone 2</th>
+                    <td>{{ personneMoraleData.telephone2PersonneMorale || 'Non renseigné' }}</td>
+                  </tr>
+                  <tr>
+                    <th>Nom du responsable</th>
+                    <td>{{ personneMoraleData.nomResponsable }}</td>
+                    <th>Prénom du responsable</th>
+                    <td>{{ personneMoraleData.prenomResponsable }}</td>
+                  </tr>
+                  <tr>
+                    <th>Siège</th>
+                    <td>{{ personneMoraleData.siege }}</td>
+                    <th>Email du responsable</th>
+                    <td>{{ personneMoraleData.mailPersonneMorale }}</td>
+                  </tr>
+                </ng-container>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Liste des fichiers -->
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header bg-light">
+              <h5 class="mb-0">Pièces jointes</h5>
+            </div>
+            <div class="card-body">
+              <div *ngIf="fichiersFournis; else noFiles">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Type de document</th>
+                      <th>Statut</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <ng-container *ngFor="let fileName of getFichiersNames()">
+                      <tr>
+                        <td>{{ fileName }}</td>
+                        <td><span class="badge bg-success">Fourni</span></td>
+                      </tr>
+                    </ng-container>
+                  </tbody>
+                </table>
+              </div>
+              <ng-template #noFiles>
+                <div class="alert alert-warning">
+                  Aucun fichier n'a été fourni.
+                </div>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <div class="row">
+        <div class="col-6">
+          <button class="btn btn-danger" cdkStepperPrevious>
+            <i class="bi bi-arrow-left"></i> Retour aux fichiers
+          </button>
+        </div>
+        <div class="col-6 text-end">
+          <button class="btn btn-success" (click)="onSoumettreDefinitif()" [disabled]="soumissionEnCours">
+            <i class="bi bi-check-circle"></i>
+            <span *ngIf="!soumissionEnCours">Soumettre la demande</span>
+            <span *ngIf="soumissionEnCours">Traitement en cours...</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<!-- <div class="container mt-4">
+  <div class="card">
+    <div class="card-header bg-primary text-white">
+      <h3 class="mb-0">Résumé de la demande</h3>
+    </div>
+    <div class="card-body">
+      <- Type de demandeur et de demande -->
+      <!-- <div class="row mb-4">
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header bg-light">
+              <h5 class="mb-0">Informations générales</h5>
+            </div>
+            <div class="card-body">
+              <table class="table table-bordered">
+                <tr>
+                  <th>Type de demandeur</th>
+                  <td>{{ typeDemandeur === 'physique' ? 'Personne physique' : 'Personne morale' }}</td>
+                </tr>
+                <tr>
+                  <th>Type de demande</th>
+                  <td>{{ typeDemandeLabels[typeDemande] || typeDemande }}</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+      <!-- Informations du demandeur -->
+      <!-- <div class="row mb-4">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header bg-light">
+              <h5 class="mb-0">Informations du demandeur</h5>
+            </div>
+            <div class="card-body">
+              <table class="table table-bordered">
+                <ng-container *ngIf="typeDemandeur === 'physique' && demandeurData">
+                  <tr>
+                    <th>Nom</th>
+                    <td>{{ demandeurData.nom }}</td>
+                    <th>Prénom</th>
+                    <td>{{ demandeurData.prenom }}</td>
+                  </tr>
+                  <tr>
+                    <th>Email</th>
+                    <td>{{ demandeurData.mailPersonnePhysique }}</td>
+                    <th>Date de naissance</th>
+                    <td>{{ demandeurData.dateNaissance | date }}</td>
+                  </tr>
+                  <tr>
+                    <th>Nationalité</th>
+                    <td>{{ demandeurData.nationalite }}</td>
+                    <th>Genre</th>
+                    <td>{{ demandeurData.genre === 'masculin' ? 'Masculin' : 'Féminin' }}</td>
+                  </tr>
+                  <tr>
+                    <th>Téléphone 1</th>
+                    <td>{{ demandeurData.telephone1PersonnePhysique }}</td>
+                    <th>Téléphone 2</th>
+                    <td>{{ demandeurData.telephone2PersonnePhysique || 'Non renseigné' }}</td>
+                  </tr>
+                  <tr>
+                    <th>Ville de résidence</th>
+                    <td>{{ demandeurData.villeResidance }}</td>
+                    <th>Type de pièce</th>
+                    <td>{{ demandeurData.typePiece === 'cnib' ? 'CNIB' : 'PASSEPORT' }}</td>
+                  </tr>
+                  <tr>
+                    <th>Numéro de pièce</th>
+                    <td>{{ demandeurData.numPiece }}</td>
+                    <th></th>
+                    <td></td>
+                  </tr>
+                </ng-container>
+
+                <ng-container *ngIf="typeDemandeur === 'morale' && personneMoraleData">
+                  <tr>
+                    <th>Raison sociale</th>
+                    <td>{{ personneMoraleData.raisonSociale }}</td>
+                    <th>RCCM</th>
+                    <td>{{ personneMoraleData.RCCM }}</td>
+                  </tr>
+                  <tr>
+                    <th>IFU</th>
+                    <td>{{ personneMoraleData.IFU }}</td>
+                    <th>Email</th>
+                    <td>{{ personneMoraleData.mailEntreprise }}</td>
+                  </tr>
+                  <tr>
+                    <th>Téléphone 1</th>
+                    <td>{{ personneMoraleData.telephone1Entreprise }}</td>
+                    <th>Téléphone 2</th>
+                    <td>{{ personneMoraleData.telephone2Entreprise || 'Non renseigné' }}</td>
+                  </tr>
+                  <tr>
+                    <th>Nom du responsable</th>
+                    <td>{{ personneMoraleData.nomContact }}</td>
+                    <th>Prénom du responsable</th>
+                    <td>{{ personneMoraleData.prenomContact }}</td>
+                  </tr>
+                  <tr>
+                    <th>Téléphone du responsable</th>
+                    <td>{{ personneMoraleData.telephoneContact }}</td>
+                    <th>Email du responsable</th>
+                    <td>{{ personneMoraleData.mailContact }}</td>
+                  </tr>
+                </ng-container>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+      <!-- Liste des fichiers -->
+      <!-- <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header bg-light">
+              <h5 class="mb-0">Pièces jointes</h5>
+            </div>
+            <div class="card-body">
+              <div *ngIf="fichiersFournis; else noFiles">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Type de document</th>
+                      <th>Statut</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <ng-container *ngFor="let fileName of getFichiersNames()">
+                      <tr>
+                        <td>{{ fileName }}</td>
+                        <td><span class="badge bg-success">Fourni</span></td>
+                      </tr>
+                    </ng-container>
+                  </tbody>
+                </table>
+              </div>
+              <ng-template #noFiles>
+                <div class="alert alert-warning">
+                  Aucun fichier n'a été fourni.
+                </div>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <div class="row">
+        <div class="col-6">
+          <button class="btn btn-danger" cdkStepperPrevious>
+            <i class="bi bi-arrow-left"></i> Retour aux fichiers
+          </button>
+        </div>
+        <div class="col-6 text-end">
+          <button class="btn btn-success" (click)="onSoumettreDefinitif()">
+            <i class="bi bi-check-circle"></i> Soumettre la demande
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+
+
+
+

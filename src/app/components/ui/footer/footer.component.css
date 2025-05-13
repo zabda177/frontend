@@ -1,0 +1,53 @@
+.header {
+  background-color: #198753;
+  color: white;
+}
+
+.logo {
+  width: 70px;
+  height: 70px;
+}
+
+/* Taille de police augmentée pour le header */
+.header nav a {
+  font-size: 1.25rem; /* Taille plus grande pour les boutons de navigation */
+  font-weight: 500; /* Légèrement plus gras pour une meilleure lisibilité */
+}
+
+.info-bar {
+  background-color: #f8f9fa;
+}
+
+.main-content {
+  background-color: white;
+  padding-bottom: 120px; /* Augmenté pour accommoder le footer plus grand */
+}
+
+.footer {
+  background-color: #198753;
+  color: white;
+  font-size: 1.1rem; /* Augmentation de la taille de police du footer */
+}
+
+.feature-icon {
+  font-size: 3rem;
+  color: #198753;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100px; /* Hauteur du footer augmentée de 80px à 100px */
+}
+
+/* Style pour le contenu du footer */
+footer .container {
+  padding: 15px 0;
+}
+
+footer a {
+  color: white;
+  font-size: 1.1rem; /* Taille de police augmentée pour les liens du footer */
+}

@@ -1,0 +1,33 @@
+.card {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.card-header {
+  font-weight: bold;
+}
+
+.table th {
+  width: 30%;
+  background-color: #f8f9fa;
+}
+
+.btn-light {
+  background-color: #f8f9fa;
+  border-color: #dee2e6;
+}
+
+.btn-light:hover {
+  background-color: #e2e6ea;
+  border-color: #dae0e5;
+}
+
+.alert {
+  border-radius: 4px;
+  padding: 15px;
+}
+
+.spinner-border {
+  width: 3rem;
+  height: 3rem;
+}

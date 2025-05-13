@@ -1,0 +1,22 @@
+.card {
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+}
+
+.card-header {
+  font-weight: bold;
+}
+
+table th {
+  width: 25%;
+  background-color: #f8f9fa;
+}
+
+.badge {
+  font-size: 0.9rem;
+  padding: 0.4rem 0.6rem;
+}
+
+.btn i {
+  margin-right: 5px;
+}
