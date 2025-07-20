@@ -43,13 +43,13 @@ import { Router } from '@angular/router';
         </div>
       </mat-dialog-content>
       <mat-dialog-actions align="end">
-        <button mat-button color="primary" (click)="retourAccueil()">J'ai noté</button>
+        <button mat-button color="primary" (click)="retourAccueil()"> OK </button>
       </mat-dialog-actions>
     </div>
   `,
   styles: [`
     .dialog-container {
-      background-color: rgb(177, 221, 190);
+      background-color: rgb(232, 237, 234);
       padding: 20px;
       border-radius: 8px;
       box-shadow: 0 3px 6px rgba(0,0,0,0.1);

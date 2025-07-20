@@ -59,7 +59,7 @@
                 }">
             {{ (currentStep > 1 && !isRejected()) ? '✓' : '1' }}
           </span>
-          <span class="progress-label">Demande Soumise</span>
+          <span class="progress-label">Demande Soumise avec succès </span>
         </li>
 
         <!-- Demande acceptée -->
@@ -93,7 +93,7 @@
                 }">
             {{ (currentStep >= 3 && !isRejected()) ? '✓' : '3' }}
           </span>
-          <span class="progress-label">Validée par Sous Comité</span>
+          <span class="progress-label">Votre demande est validée par le sous Comité</span>
         </li>
 
         <!-- Demande rejetée (séparée et indépendante) -->
@@ -111,7 +111,7 @@
                 }">
             {{ isRejected() ? '✗' : '✗' }}
           </span>
-          <span class="progress-label">Demande Rejetée</span>
+          <span class="progress-label">Votre demande a été rejeté, veuillez renouveler votre demande</span>
         </li>
       </ul>
     </section>

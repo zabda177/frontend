@@ -2,9 +2,10 @@
   <div class="card">
     <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
       <h4>Détails de la demande</h4>
-      <button class="btn btn-light" (click)="retourListe()">
-        <i class="fa fa-arrow-left"></i> Retour à la liste
-      </button>
+      <button class="btn btn-light" [routerLink]="['/demandesValide']">
+  <i class="fa fa-arrow-left"></i> Retour à la liste
+</button>
+
     </div>
 
     <div class="card-body">

@@ -5,8 +5,8 @@
       <a routerLink="/customer/home" class="btn btn-danger btn-sm me-2">Accueil</a>
       <a routerLink="/verification" class="btn btn-outline-light btn-sm me-2">Vérification</a>
       <a routerLink="#" class="btn btn-outline-light btn-sm me-2">Textes réglementaires</a>
-           <a routerLink="#" class="btn btn-outline-light btn-sm me-2">Guide</a>
-      <a routerLink="#" class="btn btn-outline-light btn-sm me-2">Foire aux Question</a>
+           <a routerLink="/guide" class="btn btn-outline-light btn-sm me-2">Guide</a>
+      <a routerLink="/faq" class="btn btn-outline-light btn-sm me-2">Foire aux Question</a>
 
       <!-- Utilisation de *ngIf avec isLoggedIn() pour afficher les bons boutons -->
       <ng-container *ngIf="!isLoggedIn(); else loggedInButtons">

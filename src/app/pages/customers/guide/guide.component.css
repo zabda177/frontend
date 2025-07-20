@@ -1,0 +1,22 @@
+.guide-content {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.guide-content h2 {
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.pdf-container {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.pdf-container iframe {
+  display: block;
+}

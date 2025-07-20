@@ -38,6 +38,8 @@ import { DemandesValideesComponent } from './pages/customers/demandes-validees/d
 import { DemandesRejeteComponent } from './pages/customers/demandes-rejete/demandes-rejete.component';
 import { DetailsComponent } from './pages/customers/details/details.component';
 import { LoginComponent } from './pages/login/login.component';
+import { GuideComponent } from './pages/customers/guide/guide.component';
+import { FaqComponent } from './pages/customers/faq/faq.component';
 
 
 
@@ -49,6 +51,17 @@ export const routes: Routes = [
   //   path: 'resume',
   //   component: ResumeComponent,
   // },
+
+  {
+    path: 'guide',
+    component: GuideComponent,
+  },
+
+  {
+    path: 'faq',
+    component: FaqComponent,
+  },
+
 
   {
     path: 'details/:id',
