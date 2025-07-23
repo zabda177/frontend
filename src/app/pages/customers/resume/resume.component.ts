@@ -68,9 +68,9 @@ export class ResumeComponent implements OnInit {
     this.preparerDonneesEtEmettre();
   }
 
-  // Nouvelle méthode pour préparer et émettre les données
+  // méthode pour préparer et émettre les données
   preparerDonneesEtEmettre() {
-    // Si demandesData n'existe pas, créer un objet avec les données disponibles
+    // Si demandesData n'existe pas, crée un objet avec les données disponibles
     if (!this.demandesData) {
       this.demandesData = {
         typeDemande: this.typeDemande,
@@ -92,8 +92,7 @@ export class ResumeComponent implements OnInit {
     }
 
     if (this.fichierData instanceof FormData) {
-      // Pour FormData, nous considérons qu'il y a des fichiers
-      // Vérifier si la FormData n'est pas vide (contient plus que le champ _type)
+      // Vérifie si la FormData n'est pas vide (contient plus que le champ _type)
       return Array.from(this.fichierData.keys()).some(key => key !== '_type');
     } else if (Array.isArray(this.fichierData)) {
       return this.fichierData.length > 0;

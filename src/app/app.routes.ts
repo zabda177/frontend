@@ -40,21 +40,24 @@ import { DetailsComponent } from './pages/customers/details/details.component';
 import { LoginComponent } from './pages/login/login.component';
 import { GuideComponent } from './pages/customers/guide/guide.component';
 import { FaqComponent } from './pages/customers/faq/faq.component';
+import { ResumeComponent } from './pages/customers/resume/resume.component';
+import { DetailsDemandeComponent } from './pages/customers/details-demande/details-demande.component';
 
 
 
 
 export const routes: Routes = [
 
-
-  // {
-  //   path: 'resume',
-  //   component: ResumeComponent,
-  // },
+  {
+    path: 'detailsDemande/:id', component: DetailsDemandeComponent
+  },
 
   {
-    path: 'guide',
-    component: GuideComponent,
+    path: 'resume/:id', component: ResumeComponent,
+  },
+
+  {
+    path: 'guide', component: GuideComponent,
   },
 
   {

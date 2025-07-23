@@ -2,36 +2,32 @@
     * @description      :
     * @author           : ASUS
     * @group            :
-    * @created          : 25/04/2025 - 09:33:53
+    * @created          : 23/07/2025 - 13:25:23
     *
     * MODIFICATION LOG
     * - Version         : 1.0.0
-    * - Date            : 25/04/2025
+    * - Date            : 23/07/2025
     * - Author          : ASUS
     * - Modification    :
 **/
-import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import { DemandeServiceService } from '../../../components/demande-certificat/service/demande-service.service';
-import { PieceJointeService } from '../../../components/demande-certificat/service/piece-jointe.service';
+import { Component } from '@angular/core';
 import { SoumissionDto } from '../../../components/demande-certificat/model/demande';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { DemandeServiceService } from '../../../components/demande-certificat/service/demande-service.service';
+import { ToastrService } from 'ngx-toastr';
+import { PieceJointeService } from '../../../components/demande-certificat/service/piece-jointe.service';
+import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-details-demande',
   standalone: true,
-  imports: [
-    CommonModule,
-    RouterModule,
-    HttpClientModule
-  ],
-  templateUrl: './details.component.html',
-  styleUrl: './details.component.css'
-
+  imports: [CommonModule, RouterModule, HttpClientModule],
+  templateUrl: './details-demande.component.html',
+  styleUrl: './details-demande.component.css'
 })
-export class DetailsComponent implements OnInit {
+export class DetailsDemandeComponent {
+
   demande: SoumissionDto | null = null;
   piecesJointes: any[] = []; // Tableau pour stocker les pièces jointes
   loading = true;
@@ -259,4 +255,5 @@ export class DetailsComponent implements OnInit {
       });
     }
   }
+
 }

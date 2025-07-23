@@ -1,0 +1,63 @@
+
+  /* Augmentation globale de la taille de police */
+  .fs-5 {
+    font-size: 1.125rem !important; /* 18px */
+  }
+
+  /* Taille de police pour les badges */
+  .fs-6 {
+    font-size: 1rem !important; /* 16px */
+  }
+
+  /* Ajouter plus d'espace entre les colonnes */
+  .table th, .table td {
+    padding: 0.75rem 1rem;
+  }
+
+  /* Améliorer la lisibilité des en-têtes du tableau */
+  .thead-dark th {
+    font-weight: 600;
+  }
+
+  /* Styles pour les statistiques */
+  .stat-card {
+    border: 1px solid #dee2e6;
+    border-radius: 0.5rem;
+    transition: transform 0.2s;
+  }
+
+  .stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+
+  .stat-number {
+    font-size: 2rem;
+    font-weight: bold;
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.875rem;
+    color: #6c757d;
+    margin-top: 0.25rem;
+  }
+
+  /* Amélioration visuelle de la section totaux */
+  .card-header {
+    border-bottom: 2px solid rgba(255,255,255,0.2);
+  }
+
+  .table-bordered th,
+  .table-bordered td {
+    border: 1px solid #dee2e6;
+  }
+
+  /* Animation pour les badges */
+  .badge {
+    transition: all 0.3s ease;
+  }
+
+  .badge:hover {
+    transform: scale(1.1);
+  }

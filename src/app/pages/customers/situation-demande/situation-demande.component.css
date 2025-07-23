@@ -1,0 +1,49 @@
+.situation-container {
+  padding: 20px 0;
+}
+
+.stat-card {
+  transition: all 0.3s ease;
+  border: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  min-height: 180px;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.stat-icon {
+  margin-bottom: 10px;
+}
+
+.total-number {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.card-title {
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.table th, .table td {
+  vertical-align: middle;
+}
+
+.spinner-border {
+  width: 3rem;
+  height: 3rem;
+}
+
+@media (max-width: 768px) {
+  .total-number {
+    font-size: 2rem;
+  }
+
+  .stat-card {
+    min-height: 150px;
+  }
+}

@@ -18,8 +18,18 @@ import {
   Region,
   SoumissionDto,
 } from '../model/demande';
-import { catchError, map, Observable, throwError } from 'rxjs';
+import { catchError, map, Observable, of, throwError } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+// Interface pour les statistiques par type de demande
+export interface StatistiqueParType {
+  typeDemande: string;
+  nombreTotal: number;
+  nombreSoumises: number;
+  nombreAcceptees: number;
+  nombreValidees: number;
+  nombreRejetees: number;
+}
 
 @Injectable({
   providedIn: 'root',
@@ -52,6 +62,9 @@ export class DemandeServiceService {
       formData,
       { headers }
     );
+  }
+  getDemandeByCodeDemande(code: string): Observable<SoumissionDto> {
+    return this.http.get<SoumissionDto>(`${this.baseUrl}/demande/demandes/code/${code}`);
   }
 
 
@@ -217,6 +230,8 @@ export class DemandeServiceService {
     );
   }
 
+
+
   private getStatusLabel(step: number): string {
     switch (step) {
       case -1: return 'Demande Rejetée';
@@ -230,10 +245,45 @@ export class DemandeServiceService {
     }
   }
 
+  /**
+ * Télécharge un fichier par son URL
+ * @param url - L'URL complète du fichier à télécharger
+ * @returns Observable<Blob> -
+ */
+  downloadFileByUrl(url: string): Observable<Blob> {
+    // Encoder l'URL pour la passer en paramètre de requête
+    const encodedUrl = encodeURIComponent(url);
+    const downloadUrl = `${this.baseUrl}/piece/download-by-url?url=${encodedUrl}`;
 
+    return this.http.get(downloadUrl, {
+      responseType: 'blob',
+      headers: new HttpHeaders({
+        'Accept': 'application/octet-stream'
+      }),
+      observe: 'response',
+      reportProgress: true
+    }).pipe(
+      map(response => {
+        if (response.status === 200 && response.body) {
+          return response.body;
+        }
+        throw new Error('Réponse invalide du serveur');
+      }),
+      catchError(error => {
+        console.error('Erreur lors du téléchargement du fichier:', error);
 
+        if (error.status === 404) {
+          throw new Error('Fichier non trouvé');
+        } else if (error.status === 403) {
+          throw new Error('Accès interdit');
+        } else if (error.status === 500) {
+          throw new Error('Erreur serveur interne');
+        } else if (error.status === 0) {
+          throw new Error('Impossible de contacter le serveur');
+        }
+
+        throw new Error(`Erreur de téléchargement: ${error.message || 'Erreur inconnue'}`);
+      })
+    );
+  }
 }
-
-
-
-

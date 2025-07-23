@@ -1,0 +1,104 @@
+
+  /* Augmentation globale de la taille de police */
+  .fs-5 {
+    font-size: 1.125rem !important; /* 18px */
+  }
+
+  /* Taille de police pour les badges */
+  .fs-6 {
+    font-size: 1rem !important; /* 16px */
+  }
+
+  /* Ajouter plus d'espace entre les colonnes */
+  .table th, .table td {
+    padding: 0.75rem 1rem;
+  }
+
+  /* Améliorer la lisibilité des en-têtes du tableau */
+  .thead-dark th {
+    font-weight: 600;
+  }
+
+  /* Styles pour les statistiques */
+  .stat-card {
+    border: 1px solid #dee2e6;
+    border-radius: 0.5rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+    min-height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+
+  .stat-number {
+    font-size: 2rem;
+    font-weight: bold;
+    line-height: 1;
+    margin-bottom: 0.25rem;
+  }
+
+  .stat-label {
+    font-size: 0.875rem;
+    color: #6c757d;
+    font-weight: 500;
+  }
+
+  /* Amélioration visuelle de la section totaux */
+  .card-header {
+    border-bottom: 2px solid rgba(0,0,0,0.1);
+  }
+
+  .table-bordered th,
+  .table-bordered td {
+    border: 1px solid #dee2e6;
+  }
+
+  /* Animation pour les badges */
+  .badge {
+    transition: all 0.3s ease;
+  }
+
+  .badge:hover {
+    transform: scale(1.05);
+  }
+
+  /* Styles pour les titres des sections */
+  h6 {
+    font-weight: 600;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #f8f9fa;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .stat-card {
+      margin-bottom: 1rem;
+    }
+
+    .col-md-6 {
+      margin-bottom: 1rem;
+    }
+  }
+
+  /* Amélioration des couleurs pour les différents statuts */
+  .text-warning {
+    color: #0e0a01 !important;
+  }
+
+  .bg-warning {
+    background-color: #fff3cd !important;
+  }
+
+  /* Style pour les tableaux de totaux */
+  .table-sm th,
+  .table-sm td {
+    padding: 0.5rem;
+    font-size: 0.95rem;
+  }
+

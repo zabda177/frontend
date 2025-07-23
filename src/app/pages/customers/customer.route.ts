@@ -1,3 +1,4 @@
+import { ResumeComponent } from './resume/resume.component';
 import { LoginComponent } from './../login/login.component';
 /**
     * @description      :
@@ -24,7 +25,12 @@ export const CustomerRoute: Routes = [
 
 
 
+  // {
+  //   path: 'resume',
+  //   loadComponent: () =>
+  //     import('./resume/resume.component').then((m) => m.ResumeComponent),
 
+  // },
 
   {
     path: 'home',
@@ -53,6 +59,7 @@ export const CustomerRoute: Routes = [
       ),
     data: { public: true }
   },
+
 
   /* {
     path: 'demandes-detail/:id',

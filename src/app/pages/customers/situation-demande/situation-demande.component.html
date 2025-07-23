@@ -1,1 +1,145 @@
-<p>situation-demande works!</p>
+<!-- <div class="situation-container">
+  <div class="row">
+    <!-- Permis Pêche Validé
+    <div class="col-md-6 col-lg-4 mb-3">
+      <div class="card stat-card bg-light">
+        <div class="card-body text-center">
+          <div class="stat-icon mb-2">
+            <i class="fas fa-fish text-primary fs-2"></i>
+          </div>
+          <h5 class="card-title text-primary">Permis Pêche Validé</h5>
+          <div class="total-number text-primary">{{ situationStats?.totalPermispeche || 0 }}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Licence Guide Validé
+    <div class="col-md-6 col-lg-4 mb-3">
+      <div class="card stat-card bg-light">
+        <div class="card-body text-center">
+          <div class="stat-icon mb-2">
+            <i class="fas fa-user-tie text-success fs-2"></i>
+          </div>
+          <h5 class="card-title text-success">Licence Guide Validé</h5>
+          <div class="total-number text-success">{{ situationStats?.totalLicenceGuide || 0 }}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Licence Commerciale Validé
+    <div class="col-md-6 col-lg-4 mb-3">
+      <div class="card stat-card bg-light">
+        <div class="card-body text-center">
+          <div class="stat-icon mb-2">
+            <i class="fas fa-briefcase text-info fs-2"></i>
+          </div>
+          <h5 class="card-title text-info">Licence Commerciale Validé</h5>
+          <div class="total-number text-info">{{ situationStats?.totalLicenceCommerciale || 0 }}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Concession Validé
+    <div class="col-md-6 col-lg-4 mb-3">
+      <div class="card stat-card bg-light">
+        <div class="card-body text-center">
+          <div class="stat-icon mb-2">
+            <i class="fas fa-map-marked-alt text-warning fs-2"></i>
+          </div>
+          <h5 class="card-title text-warning">Concession Validé</h5>
+          <div class="total-number text-warning">{{ situationStats?.totalConcession || 0 }}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Création Établissement Validé
+    <div class="col-md-6 col-lg-4 mb-3">
+      <div class="card stat-card bg-light">
+        <div class="card-body text-center">
+          <div class="stat-icon mb-2">
+            <i class="fas fa-building text-danger fs-2"></i>
+          </div>
+          <h5 class="card-title text-danger">Création Établissement Validé</h5>
+          <div class="total-number text-danger">{{ situationStats?.totalCreationEtablissement || 0 }}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Total Général
+    <div class="col-md-6 col-lg-4 mb-3">
+      <div class="card stat-card bg-primary text-white">
+        <div class="card-body text-center">
+          <div class="stat-icon mb-2">
+            <i class="fas fa-chart-bar text-white fs-2"></i>
+          </div>
+          <h5 class="card-title text-white">Total Général</h5>
+          <div class="total-number text-white">{{ getTotalGeneral() }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Message si aucune donnée
+  <div *ngIf="!situationStats" class="text-center mt-4">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Chargement...</span>
+    </div>
+    <p class="mt-2">Chargement des données...</p>
+  </div>
+
+  <!-- Graphique ou tableau détaillé (optionnel)
+  <div *ngIf="situationStats" class="mt-4">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="mb-0">Répartition des demandes validées par type</h5>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-striped table-hover">
+            <thead class="table-dark">
+              <tr>
+                <th>Type de demande</th>
+                <th class="text-center">Nombre validé</th>
+                <th class="text-center">Pourcentage</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><i class="fas fa-fish text-primary me-2"></i>Permis Pêche</td>
+                <td class="text-center">{{ situationStats?.totalPermispeche || 0 }}</td>
+                <td class="text-center">{{ getPercentage(situationStats?.totalPermispeche || 0) }}%</td>
+              </tr>
+              <tr>
+                <td><i class="fas fa-user-tie text-success me-2"></i>Licence Guide</td>
+                <td class="text-center">{{ situationStats?.totalLicenceGuide || 0 }}</td>
+                <td class="text-center">{{ getPercentage(situationStats?.totalLicenceGuide || 0) }}%</td>
+              </tr>
+              <tr>
+                <td><i class="fas fa-briefcase text-info me-2"></i>Licence Commerciale</td>
+                <td class="text-center">{{ situationStats?.totalLicenceCommerciale || 0 }}</td>
+                <td class="text-center">{{ getPercentage(situationStats?.totalLicenceCommerciale || 0) }}%</td>
+              </tr>
+              <tr>
+                <td><i class="fas fa-map-marked-alt text-warning me-2"></i>Concession</td>
+                <td class="text-center">{{ situationStats?.totalConcession || 0 }}</td>
+                <td class="text-center">{{ getPercentage(situationStats?.totalConcession || 0) }}%</td>
+              </tr>
+              <tr>
+                <td><i class="fas fa-building text-danger me-2"></i>Création Établissement</td>
+                <td class="text-center">{{ situationStats?.totalCreationEtablissement || 0 }}</td>
+                <td class="text-center">{{ getPercentage(situationStats?.totalCreationEtablissement || 0) }}%</td>
+              </tr>
+            </tbody>
+            <tfoot class="table-secondary">
+              <tr>
+                <th>Total</th>
+                <th class="text-center">{{ getTotalGeneral() }}</th>
+                <th class="text-center">100%</th>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
